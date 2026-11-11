@@ -69,10 +69,10 @@ export const SERVICES_LIST = [
       'Thumb-friendly mobile flows, Figma component libraries, and user-tested prototypes built to maximize retention and conversion.',
   },
   {
-    title: 'Java Spring Boot & Cloud Backends',
-    tag: 'Enterprise Grade',
+    title: 'App Modernization & Performance',
+    tag: 'Android & iOS Upgrades',
     description:
-      'Secure REST APIs, MySQL/PostgreSQL data architecture, JWT authentication, payment gateways, and scalable AWS/cloud deployments.',
+      'Upgrade legacy mobile apps to Jetpack Compose, SwiftUI, or Flutter—improving startup speed, crash-free rates, and Play Store ratings.',
   },
   {
     title: 'App Launch, ASO & Long-Term Scaling',

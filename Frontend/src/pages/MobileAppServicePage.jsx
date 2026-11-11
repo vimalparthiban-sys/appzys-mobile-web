@@ -7,7 +7,7 @@ const ENGAGEMENT_MODELS = [
     name: 'Fixed-Scope MVP Sprint',
     timeline: '4–8 Weeks',
     idealFor: 'Founders validating a new iOS/Android product fast with predictable cost.',
-    points: ['Clickable UI/UX Prototype', 'Core Mobile + Spring Boot API', 'Play Store & App Store Launch'],
+    points: ['Clickable UI/UX Prototype', 'Production iOS / Android Build', 'Play Store & App Store Launch'],
   },
   {
     name: 'Dedicated Senior Pod',
@@ -19,7 +19,7 @@ const ENGAGEMENT_MODELS = [
     name: 'AI & OCR Modernization',
     timeline: '2–5 Weeks',
     idealFor: 'Existing apps adding document scanning, smart extraction, or LLM workflows.',
-    points: ['On-Device / Cloud ML Integration', 'Latency & Accuracy Tuning', 'Zero Disruption to Live Users'],
+    points: ['On-Device AI & OCR Integration', 'Latency & Accuracy Tuning', 'Zero Disruption to Live Users'],
   },
 ]
 
@@ -36,7 +36,7 @@ export default function MobileAppServicePage() {
           </h1>
           <p className="mt-4 text-base leading-relaxed text-slate-600">
             We combine full-cycle agency execution with real product publishing experience—delivering
-            fast, store-compliant mobile apps backed by scalable Java Spring Boot and cloud APIs.
+            fast, store-compliant mobile apps engineered for high user retention and 4★+ store ratings.
           </p>
         </div>
 

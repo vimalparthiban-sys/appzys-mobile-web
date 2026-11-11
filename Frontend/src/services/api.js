@@ -30,4 +30,5 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
+  getEstimateById: (id) => request(`/estimates/${id}`),
 }

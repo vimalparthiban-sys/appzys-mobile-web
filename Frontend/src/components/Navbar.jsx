@@ -49,6 +49,12 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-3 md:flex">
+            <a
+              href="/#estimator"
+              className="rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:text-indigo-700"
+            >
+              Cost Estimator
+            </a>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 rounded-xl bg-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
@@ -102,12 +108,12 @@ export default function Navbar() {
       {/* Thumb-friendly sticky mobile CTA bar */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-4 py-2.5 backdrop-blur-md md:hidden">
         <div className="flex items-center gap-2.5">
-          <Link
-            to="/case-studies"
+          <a
+            href="/#estimator"
             className="flex-1 rounded-xl border border-slate-300 px-3 py-2.5 text-center text-xs font-semibold text-slate-800"
           >
-            Live App Proof
-          </Link>
+            Cost Estimator
+          </a>
           <Link
             to="/contact"
             className="flex-1 rounded-xl bg-[#4F46E5] px-3 py-2.5 text-center text-xs font-semibold text-white shadow-sm"

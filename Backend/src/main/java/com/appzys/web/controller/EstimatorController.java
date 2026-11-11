@@ -25,4 +25,12 @@ public class EstimatorController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.ok("Estimate calculated and saved", saved));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<CostEstimate>> getEstimate(@PathVariable Long id) {
+        return estimatorService.findById(id)
+                .map(est -> ResponseEntity.ok(ApiResponse.ok("Estimate found", est)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(ApiResponse.error("Estimate not found")));
+    }
 }

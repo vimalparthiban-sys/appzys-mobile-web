@@ -33,6 +33,8 @@ public record LeadRequest(
         @Size(max = 120)
         String sourcePage,
 
+        Long estimateId,
+
         // Honeypot field for bot filtering
         String website
 ) {}

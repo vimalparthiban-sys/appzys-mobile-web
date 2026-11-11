@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { CheckCircle2, Send, ShieldCheck } from 'lucide-react'
 import { api } from '../services/api'
 
@@ -14,9 +15,28 @@ const initialForm = {
 }
 
 export default function ContactPage() {
+  const [searchParams] = useSearchParams()
+  const estimateIdParam = searchParams.get('estimateId')
+  const [attachedEstimate, setAttachedEstimate] = useState(null)
   const [form, setForm] = useState(initialForm)
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState({ type: '', text: '' })
+
+  useEffect(() => {
+    if (!estimateIdParam) return
+    let active = true
+    api
+      .getEstimateById(estimateIdParam)
+      .then((res) => {
+        if (active && res.data) {
+          setAttachedEstimate(res.data)
+        }
+      })
+      .catch(() => {})
+    return () => {
+      active = false
+    }
+  }, [estimateIdParam])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -31,6 +51,7 @@ export default function ContactPage() {
     try {
       const res = await api.submitLead({
         ...form,
+        estimateId: attachedEstimate?.id ?? null,
         sourcePage: '/contact',
       })
       setStatus({
@@ -109,6 +130,15 @@ export default function ContactPage() {
               tabIndex={-1}
               autoComplete="off"
             />
+
+            {attachedEstimate && (
+              <div className="mb-5 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-xs text-indigo-900">
+                <strong>Attached Estimate #{attachedEstimate.id}:</strong>{' '}
+                ${attachedEstimate.minBudget?.toLocaleString()} – $
+                {attachedEstimate.maxBudget?.toLocaleString()} ({attachedEstimate.estWeeks} weeks •{' '}
+                {attachedEstimate.platform})
+              </div>
+            )}
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div>

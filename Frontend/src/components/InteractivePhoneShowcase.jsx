@@ -26,7 +26,7 @@ const DEMO_MODES = [
       { type: 'Spanish', value: 'Escanee documentos y extraiga datos al instante.' },
       { type: 'Tamil', value: 'ஆவணங்களை ஸ்கேன் செய்து உடனடியாக மொழிபெயர்க்கவும்.' },
     ],
-    latency: '210ms cloud + cache',
+    latency: '210ms instant sync',
   },
   {
     id: 'sprint',
@@ -36,7 +36,7 @@ const DEMO_MODES = [
     sampleInput: 'iOS TestFlight v1.4 & Android Play Internal Build Ready',
     extracted: [
       { type: 'Crash-Free Users', value: '99.8%' },
-      { type: 'API Latency', value: '82ms avg (Spring Boot)' },
+      { type: 'App Startup', value: '< 1.2s Cold Launch' },
       { type: 'IP Ownership', value: '100% Client Git Repo' },
     ],
     latency: 'Weekly Friday Demo',

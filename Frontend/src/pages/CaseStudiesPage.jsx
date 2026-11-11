@@ -6,7 +6,6 @@ import { FALLBACK_CASE_STUDIES } from '../data/appData'
 
 export default function CaseStudiesPage() {
   const [studies, setStudies] = useState(FALLBACK_CASE_STUDIES)
-  const [source, setSource] = useState('local')
 
   useEffect(() => {
     let active = true
@@ -15,7 +14,6 @@ export default function CaseStudiesPage() {
       .then((res) => {
         if (active && Array.isArray(res.data) && res.data.length > 0) {
           setStudies(res.data)
-          setSource('api')
         }
       })
       .catch(() => {
@@ -42,9 +40,6 @@ export default function CaseStudiesPage() {
               our live consumer apps.
             </p>
           </div>
-          <span className="text-xs font-medium text-slate-500">
-            Data source: {source === 'api' ? 'MySQL via Spring Boot API' : 'Studio Catalog'}
-          </span>
         </div>
 
         <div className="mt-10 space-y-6">

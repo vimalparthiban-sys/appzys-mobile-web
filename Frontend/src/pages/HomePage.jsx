@@ -10,12 +10,16 @@ import {
   Star,
 } from 'lucide-react'
 import InteractivePhoneShowcase from '../components/InteractivePhoneShowcase'
+import CostCalculator from '../components/CostCalculator'
+import TechStackTabs from '../components/TechStackTabs'
+import DevelopmentProcess from '../components/DevelopmentProcess'
+import FaqSection from '../components/FaqSection'
 import { FALLBACK_CASE_STUDIES, SERVICES_LIST } from '../data/appData'
 
 const TRUST_METRICS = [
   { value: '~1M+', label: 'Combined App Store & Play Installs' },
   { value: '700K+ / 4.1★', label: 'Flagship App (Copy Text On Screen)' },
-  { value: '5-Member Core', label: 'Senior-Only Direct Engineering' },
+  { value: 'Senior Team', label: 'Veteran Mobile App Engineers' },
   { value: '48-Hr Audit', label: 'Free Architecture & Timeline Plan' },
 ]
 
@@ -211,6 +215,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Day 2 Upgrades: Interactive Cost Estimator, Tech Stack, Process & FAQs */}
+      <CostCalculator />
+      <TechStackTabs />
+      <DevelopmentProcess />
+      <FaqSection />
 
       {/* Bottom CTA Banner */}
       <section className="py-16">

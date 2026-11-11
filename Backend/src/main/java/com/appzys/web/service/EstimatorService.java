@@ -6,6 +6,7 @@ import com.appzys.web.repository.CostEstimateRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class EstimatorService {
@@ -16,6 +17,10 @@ public class EstimatorService {
     public EstimatorService(CostEstimateRepository costEstimateRepository, ObjectMapper objectMapper) {
         this.costEstimateRepository = costEstimateRepository;
         this.objectMapper = objectMapper;
+    }
+
+    public Optional<CostEstimate> findById(Long id) {
+        return costEstimateRepository.findById(id);
     }
 
     public CostEstimate calculateAndSave(EstimateRequest request) {

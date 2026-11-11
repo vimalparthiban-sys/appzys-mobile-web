@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-slate-800 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} Appzys Technologies Private Limited. All rights reserved.</p>
-          <p>React + Vite + Tailwind CSS • Spring Boot + MySQL</p>
+          <p>Android • iOS • Flutter • React Native • AI &amp; OCR</p>
         </div>
       </div>
     </footer>
