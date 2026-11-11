@@ -1,0 +1,19 @@
+# Dependencies & build outputs
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.env
+Frontend/.env.local
+
+Backend/target/
+Backend/.mvn/
+Backend/src/main/resources/application-local.properties
+*.class
+*.jar
+*.log
+
+# IDE & OS files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
