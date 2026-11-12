@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import MobileAppServicePage from './pages/MobileAppServicePage'
 import CaseStudiesPage from './pages/CaseStudiesPage'
+import CaseStudyDetailPage from './pages/CaseStudyDetailPage'
 import ContactPage from './pages/ContactPage'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services/mobile-app-development" element={<MobileAppServicePage />} />
             <Route path="/case-studies" element={<CaseStudiesPage />} />
+            <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>

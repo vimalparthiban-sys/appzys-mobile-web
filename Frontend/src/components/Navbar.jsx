@@ -17,14 +17,14 @@ export default function Navbar() {
       <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0B132B] via-[#4F46E5] to-[#06B6D4] text-white shadow-sm">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0A192F] via-[#2563EB] to-[#1D63ED] text-white shadow-sm">
               <Smartphone className="h-5 w-5" />
             </div>
             <div>
-              <span className="font-display text-lg font-extrabold tracking-tight text-[#0B132B]">
+              <span className="font-display text-lg font-extrabold tracking-tight text-[#0A192F]">
                 Appzys
               </span>
-              <span className="ml-1.5 hidden rounded-full bg-indigo-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-indigo-700 sm:inline-block">
+              <span className="ml-1.5 hidden rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-blue-700 sm:inline-block">
                 AI &amp; Mobile Studio
               </span>
             </div>
@@ -38,8 +38,8 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `text-sm font-medium transition-colors ${
                     isActive
-                      ? 'text-indigo-600'
-                      : 'text-slate-600 hover:text-[#0B132B]'
+                      ? 'text-blue-600'
+                      : 'text-slate-600 hover:text-[#0A192F]'
                   }`
                 }
               >
@@ -51,13 +51,13 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <a
               href="/#estimator"
-              className="rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:text-indigo-700"
+              className="rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
             >
               Cost Estimator
             </a>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#1D63ED] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1652CA]"
             >
               <Sparkles className="h-4 w-4" />
               Free 48-Hr Audit
@@ -85,7 +85,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     `rounded-lg px-3 py-2 text-sm font-semibold ${
-                      isActive ? 'bg-indigo-50 text-indigo-700' : 'text-slate-700'
+                      isActive ? 'bg-blue-50 text-blue-700' : 'text-slate-700'
                     }`
                   }
                 >
@@ -95,7 +95,7 @@ export default function Navbar() {
               <Link
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#4F46E5] px-4 py-2.5 text-sm font-semibold text-white"
+                className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2.5 text-sm font-semibold text-white"
               >
                 Get Free 48-Hr App Audit
                 <ArrowRight className="h-4 w-4" />
@@ -116,7 +116,7 @@ export default function Navbar() {
           </a>
           <Link
             to="/contact"
-            className="flex-1 rounded-xl bg-[#4F46E5] px-3 py-2.5 text-center text-xs font-semibold text-white shadow-sm"
+            className="flex-1 rounded-xl bg-[#2563EB] px-3 py-2.5 text-center text-xs font-semibold text-white shadow-sm"
           >
             Free App Audit
           </Link>

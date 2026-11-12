@@ -1,24 +1,77 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { CheckCircle2, Send, ShieldCheck } from 'lucide-react'
+import {
+  CheckCircle2,
+  Clock,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react'
 import { api } from '../services/api'
 
-const initialForm = {
-  name: '',
-  email: '',
-  phone: '',
-  company: '',
-  serviceType: 'Mobile App (iOS & Android)',
-  budgetRange: '$5,000 - $15,000',
-  message: '',
-  website: '', // honeypot field
+const SERVICE_OPTIONS = [
+  '01. Mobile App Development (Flutter)',
+  '02. AI Integration & Applications',
+  '03. App Enhancement & Maintenance',
+  '04. Dedicated Flutter Development / White-Label',
+]
+
+const BUDGET_OPTIONS = [
+  'Under $5,000',
+  '$5,000 - $15,000',
+  '$15,000 - $35,000',
+  '$35,000+',
+]
+
+function mapEstimateToBudgetRange(minBudget) {
+  if (!minBudget) return '$5,000 - $15,000'
+  if (minBudget < 5000) return 'Under $5,000'
+  if (minBudget <= 15000) return '$5,000 - $15,000'
+  if (minBudget <= 35000) return '$15,000 - $35,000'
+  return '$35,000+'
+}
+
+function parseFeatures(featuresJson) {
+  if (!featuresJson) return []
+  try {
+    const parsed = JSON.parse(featuresJson)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
 }
 
 export default function ContactPage() {
   const [searchParams] = useSearchParams()
   const estimateIdParam = searchParams.get('estimateId')
+  const serviceParam = searchParams.get('service')
+  const modelParam = searchParams.get('model')
+  const refParam = searchParams.get('ref')
+
+  const initialService = SERVICE_OPTIONS.includes(serviceParam)
+    ? serviceParam
+    : SERVICE_OPTIONS[0]
+
+  const initialMessage = refParam
+    ? `Hi Appzys team, I would like to discuss a mobile app similar to "${refParam}".`
+    : modelParam
+    ? `Hi Appzys team, I'm interested in the "${modelParam}" engagement model.`
+    : ''
+
   const [attachedEstimate, setAttachedEstimate] = useState(null)
-  const [form, setForm] = useState(initialForm)
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    serviceType: initialService,
+    budgetRange: BUDGET_OPTIONS[1],
+    message: initialMessage,
+    website: '', // honeypot field
+  })
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState({ type: '', text: '' })
 
@@ -30,6 +83,14 @@ export default function ContactPage() {
       .then((res) => {
         if (active && res.data) {
           setAttachedEstimate(res.data)
+          setForm((prev) => ({
+            ...prev,
+            budgetRange: mapEstimateToBudgetRange(res.data.minBudget),
+            serviceType:
+              res.data.aiLevel && res.data.aiLevel !== 'none'
+                ? 'AI / OCR / Document Scanner App'
+                : prev.serviceType,
+          }))
         }
       })
       .catch(() => {})
@@ -56,9 +117,20 @@ export default function ContactPage() {
       })
       setStatus({
         type: 'success',
-        text: res.message || 'Thank you! Your request has been saved. We will reply within 48 hours.',
+        text:
+          res.message ||
+          'Thank you! Your request has been saved. Our senior engineers will reply within 48 hours.',
       })
-      setForm(initialForm)
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        serviceType: SERVICE_OPTIONS[0],
+        budgetRange: BUDGET_OPTIONS[1],
+        message: '',
+        website: '',
+      })
     } catch (err) {
       setStatus({
         type: 'error',
@@ -69,14 +141,18 @@ export default function ContactPage() {
     }
   }
 
+  const attachedFeatures = parseFeatures(attachedEstimate?.featuresJson)
+
   return (
     <div className="py-14 sm:py-18">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        {/* Left Pitch & Audit Deliverable Info */}
         <div className="lg:col-span-5">
-          <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-indigo-700">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-700">
+            <Sparkles className="h-3.5 w-3.5" />
             Free 48-Hr Architecture Audit
           </span>
-          <h1 className="mt-4 font-display text-3xl font-extrabold text-[#0B132B]">
+          <h1 className="mt-4 font-display text-3xl font-extrabold text-[#0A192F]">
             Share Your App Idea With Our Senior Engineers
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
@@ -85,36 +161,59 @@ export default function ContactPage() {
           </p>
 
           <div className="mt-8 space-y-4 rounded-2xl border border-slate-200 bg-white p-6">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              What You Receive in 48 Hours
+            </div>
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" />
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
               <div>
-                <h2 className="text-sm font-bold text-[#0B132B]">Recommended Tech Stack</h2>
+                <h2 className="text-sm font-bold text-[#0A192F]">Flutter &amp; AI Architecture Plan</h2>
                 <p className="text-xs text-slate-600">
-                  Clear advice on Native vs. Flutter/React Native &amp; AI integration.
+                  Clear feasibility on Flutter, Provider, Firebase Cloud Functions &amp; AI API integration.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" />
+              <Clock className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
               <div>
-                <h2 className="text-sm font-bold text-[#0B132B]">Realistic Timeline &amp; Cost</h2>
+                <h2 className="text-sm font-bold text-[#0A192F]">Realistic Timeline &amp; Cost</h2>
                 <p className="text-xs text-slate-600">
-                  Transparent MVP milestone breakdown with zero hidden fees.
+                  Transparent MVP milestone breakdown with zero hidden agency fees.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <ShieldCheck className="mt-0.5 h-5 w-5 text-indigo-600" />
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
               <div>
-                <h2 className="text-sm font-bold text-[#0B132B]">NDA &amp; Full IP Protection</h2>
+                <h2 className="text-sm font-bold text-[#0A192F]">NDA &amp; Full IP Protection</h2>
                 <p className="text-xs text-slate-600">
-                  Your idea and 100% of the source code stay strictly yours.
+                  Your idea and 100% of the source code stay strictly yours from Sprint 1.
                 </p>
               </div>
             </div>
           </div>
+
+          {/* Direct Studio Contact Details */}
+          <div className="mt-5 space-y-2.5 rounded-2xl border border-blue-900/30 bg-gradient-to-r from-[#0A192F] via-[#0F2557] to-[#1D4ED8] p-6 text-xs text-blue-100 shadow-lg">
+            <div className="font-display text-sm font-bold text-white">
+              Appzys Technologies Pvt. Ltd.
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail className="h-4 w-4 text-blue-300" />
+              <span>support@appzys.com &bull; hello@appzys.com</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-blue-300" />
+              <span>+91 90253 59351</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-300" />
+              <span>Chennai / Kanchipuram, Tamil Nadu, India</span>
+            </div>
+          </div>
         </div>
 
+        {/* Right Form Panel */}
         <div className="lg:col-span-7">
           <form
             onSubmit={handleSubmit}
@@ -132,11 +231,36 @@ export default function ContactPage() {
             />
 
             {attachedEstimate && (
-              <div className="mb-5 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-xs text-indigo-900">
-                <strong>Attached Estimate #{attachedEstimate.id}:</strong>{' '}
-                ${attachedEstimate.minBudget?.toLocaleString()} – $
-                {attachedEstimate.maxBudget?.toLocaleString()} ({attachedEstimate.estWeeks} weeks •{' '}
-                {attachedEstimate.platform})
+              <div className="mb-5 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-950">
+                <div className="font-bold">
+                  Attached Scope Estimate #{attachedEstimate.id}:{' '}
+                  ${attachedEstimate.minBudget?.toLocaleString()} &ndash; $
+                  {attachedEstimate.maxBudget?.toLocaleString()} ({attachedEstimate.estWeeks} weeks)
+                </div>
+                <div className="mt-1 text-blue-800">
+                  Platform: <strong>{attachedEstimate.platform}</strong> &bull; UI:{' '}
+                  <strong>{attachedEstimate.uiLevel}</strong> &bull; AI:{' '}
+                  <strong>{attachedEstimate.aiLevel}</strong>
+                </div>
+                {attachedFeatures.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {attachedFeatures.map((feat) => (
+                      <span
+                        key={feat}
+                        className="rounded bg-white px-2 py-0.5 text-[11px] font-medium text-blue-800 ring-1 ring-blue-200"
+                      >
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {(modelParam || refParam) && !attachedEstimate && (
+              <div className="mb-5 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-950">
+                <strong>Selected Inquiry Context:</strong>{' '}
+                {modelParam ? `Engagement Model — ${modelParam}` : `Similar App Reference — ${refParam}`}
               </div>
             )}
 
@@ -151,7 +275,7 @@ export default function ContactPage() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Vimal Kumar"
-                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -165,7 +289,7 @@ export default function ContactPage() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="you@company.com"
-                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -177,7 +301,7 @@ export default function ContactPage() {
                   value={form.phone}
                   onChange={handleChange}
                   placeholder="+91 98XXX XXXXX"
-                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -189,7 +313,7 @@ export default function ContactPage() {
                   value={form.company}
                   onChange={handleChange}
                   placeholder="Your Company"
-                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -200,13 +324,13 @@ export default function ContactPage() {
                   name="serviceType"
                   value={form.serviceType}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
                 >
-                  <option>Mobile App (iOS &amp; Android)</option>
-                  <option>Flutter / React Native Cross-Platform</option>
-                  <option>AI / OCR / Document Scanner App</option>
-                  <option>UI/UX Design &amp; Prototype</option>
-                  <option>Dedicated Engineering Pod</option>
+                  {SERVICE_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -217,12 +341,13 @@ export default function ContactPage() {
                   name="budgetRange"
                   value={form.budgetRange}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
                 >
-                  <option>Under $5,000</option>
-                  <option>$5,000 - $15,000</option>
-                  <option>$15,000 - $35,000</option>
-                  <option>$35,000+</option>
+                  {BUDGET_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -238,7 +363,7 @@ export default function ContactPage() {
                 value={form.message}
                 onChange={handleChange}
                 placeholder="Target users, key features, or timeline goals..."
-                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
               />
             </div>
 
@@ -246,7 +371,7 @@ export default function ContactPage() {
               <div
                 className={`mt-4 rounded-xl px-4 py-3 text-sm font-medium ${
                   status.type === 'success'
-                    ? 'bg-emerald-50 text-emerald-800'
+                    ? 'bg-blue-50 text-blue-800'
                     : 'bg-rose-50 text-rose-700'
                 }`}
               >
@@ -257,7 +382,7 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#4F46E5] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 disabled:opacity-60"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:opacity-60"
             >
               <Send className="h-4 w-4" />
               {submitting ? 'Submitting Request...' : 'Request My Free 48-Hr Audit'}
