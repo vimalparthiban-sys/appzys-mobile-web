@@ -30,4 +30,9 @@ public class LeadController {
                 )
         );
     }
+
+    @GetMapping
+    public ResponseEntity<ApiResponse<java.util.List<Lead>>> listLeads() {
+        return ResponseEntity.ok(ApiResponse.ok("Recent client inquiries", leadService.getRecentLeads()));
+    }
 }

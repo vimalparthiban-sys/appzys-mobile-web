@@ -58,9 +58,19 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero Section: MindInventory Dark Editorial Mesh + OrangeMantra Bold Action Contrast */}
-      <section className="bg-grid-dark relative overflow-hidden bg-[#0A192F] py-16 text-white sm:py-22">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.34),transparent_48%),radial-gradient(circle_at_bottom_left,rgba(29,99,237,0.16),transparent_42%)]" />
+      {/* Hero Section: Full-Bleed Cinematic AI & Mobile Studio Hero Banner */}
+      <section className="relative overflow-hidden bg-[#0A192F] py-10 text-white sm:py-14 lg:py-16">
+        {/* Full-Bleed Cinematic Tech Background Image: Exactly fits 100% width and height without cropping */}
+        <div className="pointer-events-none absolute inset-0">
+          <img
+            src="/home-hero-banner.png"
+            alt="Appzys AI Mobile Engineering Studio"
+            className="h-full w-full object-fill"
+          />
+          {/* Subtle balanced gradient overlay: text readable on left, robotic hand & holographic brain vibrant on right */}
+          <div className="absolute inset-0 bg-[#0A192F]/40 md:bg-gradient-to-r md:from-[#0A192F]/85 md:via-[#0A192F]/45 md:to-[#0A192F]/15" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.2),transparent_50%)]" />
+        </div>
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
           <div className="lg:col-span-7">
@@ -225,19 +235,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dark Bento Showcase: Built by Appzys Case Studies + Mini Phone UI Previews */}
-      <section className="bg-grid-dark relative overflow-hidden bg-[#0A192F] py-16 text-white sm:py-22">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(29,99,237,0.16),transparent_48%)]" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Case Studies Showcase: Clean White Sheet Canvas + 3D Studio Cards */}
+      <section className="border-t border-slate-200 bg-white py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
                 Product Portfolio / In-House Case Studies
               </span>
-              <h2 className="mt-2 font-display text-2xl font-extrabold text-white sm:text-4xl">
+              <h2 className="mt-2 font-display text-2xl font-extrabold text-black sm:text-4xl">
                 Built by Us. Used in the Real World.
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+              <p className="mt-3 text-sm leading-relaxed text-black sm:text-base">
                 APPZYS Technologies builds and operates its own Android &amp; iOS mobile
                 applications&mdash;giving us firsthand experience across product engineering, AI
                 integration, store publishing, and continuous improvement.
@@ -248,7 +257,7 @@ export default function HomePage() {
                 type="button"
                 onClick={() => scrollCases(-1)}
                 aria-label="Previous case studies"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700 bg-slate-900/80 text-white transition hover:border-blue-400 hover:bg-[#1D63ED]"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-700 shadow-2xs transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -256,13 +265,13 @@ export default function HomePage() {
                 type="button"
                 onClick={() => scrollCases(1)}
                 aria-label="Next case studies"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700 bg-slate-900/80 text-white transition hover:border-blue-400 hover:bg-[#1D63ED]"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-700 shadow-2xs transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
               <Link
                 to="/case-studies"
-                className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-5 py-3 text-sm font-semibold text-white transition hover:border-blue-400"
+                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#1D63ED] px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/20 transition hover:bg-[#1652CA]"
               >
                 Read Full Case Studies
                 <ArrowRight className="h-4 w-4" />
@@ -272,59 +281,140 @@ export default function HomePage() {
 
           <div
             ref={carouselRef}
-            className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {featuredStudies.map((app) => (
               <div
                 key={app.slug}
-                className="w-[86%] shrink-0 snap-start sm:w-[62%] lg:w-[calc((100%-3rem)/3)]"
+                className="group relative h-[470px] w-[86%] shrink-0 snap-start sm:w-[62%] lg:w-[calc((100%-3rem)/3)] perspective-1000"
               >
-                <Link
-                  to={`/case-studies/${app.slug}`}
-                  className="group flex h-full flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/75 p-6 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-blue-400/60 hover:bg-slate-900"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="rounded-full bg-blue-500/20 px-2.5 py-1 text-[11px] font-semibold text-blue-200">
-                        {app.category}
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-400">
-                        <Star className="h-3.5 w-3.5 fill-blue-400 text-blue-400" />
-                        {app.rating}
-                      </span>
+                {app.frontImage ? (
+                  <div className="transform-style-3d relative h-full w-full transition-transform duration-700 ease-in-out group-hover:rotate-y-180">
+                    {/* FRONT FACE: High-Resolution Studio Visual */}
+                    <div className="backface-hidden absolute inset-0 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-md">
+                      <img
+                        src={app.frontImage}
+                        alt={app.appName}
+                        className="h-full w-full object-cover"
+                      />
+
+                      {/* Top Right Rating Badge */}
+                      <div className="absolute top-3.5 right-3.5 z-10 inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-slate-950/75 backdrop-blur-md px-2.5 py-1 text-xs font-bold text-amber-300 shadow-md">
+                        <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                        <span>{app.rating}</span>
+                      </div>
+
+                      {/* Bottom Info: App Name (Left) + Google Play Badge (Right) */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-4 pt-12">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-display text-sm font-bold text-white sm:text-base">
+                            {app.appName}
+                          </span>
+                          <span className="shrink-0 rounded-full border border-blue-400/40 bg-blue-500/25 px-2.5 py-0.5 text-[11px] font-semibold text-blue-200 shadow-sm">
+                            {app.installsLabel}
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Visual Mini Phone Screen Preview */}
-                    <div className="mt-4">
-                      <CaseStudyMiniPreview slug={app.slug} />
-                    </div>
+                    {/* BACK FACE: Detailed Engineering Breakdown & Links */}
+                    <div className="backface-hidden rotate-y-180 absolute inset-0 flex flex-col justify-between overflow-y-auto rounded-2xl border border-blue-400/60 bg-[#080E20] p-6 shadow-2xl">
+                      <div>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="rounded-full bg-blue-500/20 px-2.5 py-1 text-[11px] font-semibold text-blue-200">
+                            {app.category}
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-400">
+                            <Star className="h-3.5 w-3.5 fill-blue-400 text-blue-400" />
+                            {app.rating}
+                          </span>
+                        </div>
 
-                    <h3 className="mt-4 font-display text-xl font-bold text-white group-hover:text-blue-300">
-                      {app.appName}
-                    </h3>
-                    <p className="mt-1 text-xs font-semibold text-blue-400">
-                      {app.installsLabel}
-                    </p>
-                    <p className="mt-2.5 text-sm leading-relaxed text-slate-300">{app.summary}</p>
-                  </div>
+                        {/* Visual Mini Phone Screen Preview */}
+                        <div className="mt-3">
+                          <CaseStudyMiniPreview slug={app.slug} />
+                        </div>
 
-                  <div className="mt-5 border-t border-slate-800 pt-4">
-                    <div className="flex flex-wrap gap-1.5">
-                      {(app.techStack || []).map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-md border border-slate-700 bg-slate-950/70 px-2 py-1 text-[11px] font-medium text-slate-300"
+                        <h3 className="mt-3 font-display text-lg font-bold text-white">
+                          {app.appName}
+                        </h3>
+                        <p className="mt-0.5 text-xs font-semibold text-blue-400">
+                          {app.installsLabel}
+                        </p>
+                        <p className="mt-2 text-xs leading-relaxed text-slate-300">
+                          {app.summary}
+                        </p>
+                      </div>
+
+                      <div className="mt-4 border-t border-slate-800 pt-3">
+                        <div className="flex flex-wrap gap-1.5">
+                          {(app.techStack || []).map((tech) => (
+                            <span
+                              key={tech}
+                              className="rounded-md border border-slate-700 bg-slate-950/70 px-2 py-0.5 text-[10px] font-medium text-slate-300"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                        <Link
+                          to={`/case-studies/${app.slug}`}
+                          className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-300 transition-colors hover:text-white"
                         >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-blue-300">
-                      Read Engineering Breakdown
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                          Read Engineering Breakdown
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform hover:translate-x-1" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </Link>
+                ) : (
+                  <Link
+                    to={`/case-studies/${app.slug}`}
+                    className="group flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-md transition duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[11px] font-semibold text-blue-700">
+                          {app.category}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-600">
+                          <Star className="h-3.5 w-3.5 fill-blue-500 text-blue-500" />
+                          {app.rating}
+                        </span>
+                      </div>
+
+                      {/* Visual Mini Phone Screen Preview */}
+                      <div className="mt-3">
+                        <CaseStudyMiniPreview slug={app.slug} />
+                      </div>
+
+                      <h3 className="mt-3 font-display text-lg font-bold text-black group-hover:text-blue-600">
+                        {app.appName}
+                      </h3>
+                      <p className="mt-0.5 text-xs font-semibold text-blue-600">
+                        {app.installsLabel}
+                      </p>
+                      <p className="mt-2 text-xs leading-relaxed text-slate-600">{app.summary}</p>
+                    </div>
+
+                    <div className="mt-4 border-t border-slate-100 pt-3">
+                      <div className="flex flex-wrap gap-1.5">
+                        {(app.techStack || []).map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-blue-600">
+                        Read Engineering Breakdown
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </div>
+                  </Link>
+                )}
               </div>
             ))}
           </div>

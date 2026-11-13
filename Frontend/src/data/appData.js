@@ -2,6 +2,7 @@ export const FALLBACK_CASE_STUDIES = [
   {
     slug: 'ai-text-scanner',
     appName: 'AI Text Scanner',
+    frontImage: '/card-ai-text-scanner.jpg',
     tagline: 'From physical documents to usable digital information',
     category: 'Documents, OCR & AI Integration',
     installsLabel: '100K+ Google Play',
@@ -28,6 +29,7 @@ export const FALLBACK_CASE_STUDIES = [
   {
     slug: 'copy-text-on-screen',
     appName: 'Copy Text On Screen',
+    frontImage: '/card-copy-text.jpg',
     tagline: 'A focused solution to a daily mobile usability problem',
     category: 'OCR & Productivity Utility',
     installsLabel: '500K+ Google Play',
@@ -54,6 +56,7 @@ export const FALLBACK_CASE_STUDIES = [
   {
     slug: 'ai-transcript-audio-to-text',
     appName: 'AI Transcript: Audio to Text',
+    frontImage: '/card-ai-transcript.jpg',
     tagline: 'Transforming recordings into information users can work with',
     category: 'Multilingual Audio & Applied AI',
     installsLabel: '10K+ Google Play',
@@ -80,6 +83,7 @@ export const FALLBACK_CASE_STUDIES = [
   {
     slug: 'handwriting-to-text-scanner',
     appName: 'Handwriting to Text Scanner',
+    frontImage: '/card-handwriting.jpg',
     tagline: 'Bringing handwritten information into digital workflows',
     category: 'EdTech & Digitization Workflows',
     installsLabel: '10K+ Google Play',

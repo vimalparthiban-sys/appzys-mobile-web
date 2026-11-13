@@ -22,35 +22,47 @@ export default function CaseStudiesPage() {
     <div className="py-14 sm:py-18">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header & Portfolio Proof Banner */}
-        <div className="rounded-3xl bg-[#0A192F] p-8 text-white shadow-xl sm:p-10">
-          <span className="rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-200">
-            In-House Product Portfolio
-          </span>
-          <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Built by Us. Used in the Real World.
-          </h1>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            These are APPZYS Technologies&apos; own published and maintained Android &amp; iOS
-            applications&mdash;demonstrating practical engineering, AI integration, product
-            ownership, and continuous improvement.
-          </p>
+        <div className="relative overflow-hidden rounded-3xl bg-[#0A192F] p-8 text-white shadow-xl sm:p-10">
+          {/* Right-side 3D App Trio Banner Image */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-full md:w-[65%] lg:w-[55%]">
+            <img
+              src="/case-studies-banner.png"
+              alt="Appzys In-House Live Mobile Portfolio"
+              className="h-full w-full object-cover object-right"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F] via-[#0A192F]/80 to-transparent sm:via-[#0A192F]/50 md:via-[#0A192F]/20" />
+          </div>
 
-          <div className="mt-7 grid grid-cols-2 gap-4 border-t border-slate-800 pt-6 sm:grid-cols-4">
-            <div>
-              <div className="font-display text-xl font-extrabold text-blue-300">500K+</div>
-              <div className="text-xs text-slate-300">Copy Text On Screen (Play)</div>
-            </div>
-            <div>
-              <div className="font-display text-xl font-extrabold text-blue-300">100K+</div>
-              <div className="text-xs text-slate-300">AI Text Scanner (Play)</div>
-            </div>
-            <div>
-              <div className="font-display text-xl font-extrabold text-blue-300">4.6 / 5</div>
-              <div className="text-xs text-slate-300">App Store Rating</div>
-            </div>
-            <div>
-              <div className="font-display text-xl font-extrabold text-blue-300">10K+</div>
-              <div className="text-xs text-slate-300">AI Transcript &amp; Handwriting</div>
+          <div className="relative z-10 max-w-2xl">
+            <span className="rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-200">
+              In-House Product Portfolio
+            </span>
+            <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Built by Us. Used in the Real World.
+            </h1>
+            <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+              These are APPZYS Technologies&apos; own published and maintained Android &amp; iOS
+              applications&mdash;demonstrating practical engineering, AI integration, product
+              ownership, and continuous improvement.
+            </p>
+
+            <div className="mt-7 grid grid-cols-2 gap-4 border-t border-slate-800/80 pt-6 sm:grid-cols-4">
+              <div>
+                <div className="font-display text-xl font-extrabold text-blue-300">500K+</div>
+                <div className="text-xs text-slate-300">Copy Text On Screen (Play)</div>
+              </div>
+              <div>
+                <div className="font-display text-xl font-extrabold text-blue-300">100K+</div>
+                <div className="text-xs text-slate-300">AI Text Scanner (Play)</div>
+              </div>
+              <div>
+                <div className="font-display text-xl font-extrabold text-blue-300">4.6 / 5</div>
+                <div className="text-xs text-slate-300">App Store Rating</div>
+              </div>
+              <div>
+                <div className="font-display text-xl font-extrabold text-blue-300">10K+</div>
+                <div className="text-xs text-slate-300">AI Transcript &amp; Audio</div>
+              </div>
             </div>
           </div>
         </div>

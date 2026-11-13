@@ -56,4 +56,11 @@ public class LeadService {
         emailNotificationService.sendLeadAlert(saved);
         return saved;
     }
+
+    @Transactional(readOnly = true)
+    public java.util.List<Lead> getRecentLeads() {
+        return leadRepository.findAll(org.springframework.data.domain.Sort.by(
+                org.springframework.data.domain.Sort.Direction.DESC, "createdAt"
+        ));
+    }
 }

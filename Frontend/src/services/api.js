@@ -25,6 +25,7 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(payload),
     }),
+  getLeads: () => request('/leads'),
   submitEstimate: (payload) =>
     request('/estimates', {
       method: 'POST',
